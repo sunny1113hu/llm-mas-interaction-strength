@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+
+# Secrets and local machine configuration
+.env
+!.env.example
+
+# Model weights and generated outputs
+models/
+outputs/
+.hf_cache/
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/

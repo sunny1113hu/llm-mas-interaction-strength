@@ -1,0 +1,12 @@
+| task | model | metric | best_mu | best_mean | best_ci95 | n |
+| --- | --- | --- | --- | --- | --- | --- |
+| consensus | Qwen3-8B | final_dispersion | -0.50 | 1.184 | 0.480 | 10 |
+| consensus | Llama-3.1-8B | final_dispersion | -0.50 | 2.352 | 0.385 | 10 |
+| consensus | Ministral-3-8B | final_dispersion | 0.50 | 2.103 | 0.302 | 10 |
+| consensus | Ministral-3-14B | final_dispersion | -0.50 | 1.982 | 0.346 | 10 |
+| consensus | Phi-4-mini | final_dispersion | 4.50 | 3.899 | 1.787 | 10 |
+| diffusion | Qwen3-8B | roughness_final | -0.25 | 29.567 | 5.852 | 10 |
+| diffusion | Llama-3.1-8B | roughness_final | -1.25 | 45.875 | 15.162 | 10 |
+| diffusion | Ministral-3-8B | roughness_final | 0.50 | 41.221 | 7.301 | 10 |
+| diffusion | Ministral-3-14B | roughness_final | 0.25 | 30.863 | 3.929 | 10 |
+| diffusion | Phi-4-mini | roughness_final | -0.50 | 78.775 | 22.907 | 10 |

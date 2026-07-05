@@ -1,0 +1,12 @@
+| task | condition | metric | mu | mean | ci95 | std | n | runtime_h |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| consensus | main_4x4_t10_with_pi | final_dispersion | -0.50 | 1.184 | 0.480 | 0.775 | 10 | 19.23 |
+| consensus | no_pi | final_dispersion | -5.00 | 2.026 | 0.245 | 0.396 | 10 | 0.48 |
+| consensus | t30 | final_dispersion | -0.25 | 1.033 | 0.342 | 0.552 | 10 | 57.03 |
+| consensus | grid6 | final_dispersion | 0.00 | 1.112 | 0.186 | 0.301 | 10 | 44.38 |
+| consensus | grid8 | final_dispersion | -0.25 | 1.128 | 0.152 | 0.245 | 10 | 76.40 |
+| diffusion | main_4x4_t10_with_pi | roughness_final | -0.25 | 29.567 | 5.852 | 9.442 | 10 | 17.10 |
+| diffusion | no_pi | roughness_final | -5.00 | 41.629 | 4.307 | 6.948 | 10 | 0.45 |
+| diffusion | t30 | roughness_final | -0.50 | 30.492 | 4.273 | 6.894 | 10 | 50.87 |
+| diffusion | grid6 | roughness_final | -0.25 | 16.572 | 2.676 | 4.317 | 10 | 42.12 |
+| diffusion | grid8 | roughness_final | -0.25 | 12.280 | 1.417 | 2.287 | 10 | 75.89 |

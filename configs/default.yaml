@@ -1,0 +1,119 @@
+project:
+  name: cec2026
+paths:
+  outputs_root: outputs/runs
+dataset:
+  type: consensus
+  # type: diffusion
+  consensus:
+    range_list:
+      # - [0, 15]
+      - [0, 25]
+      # - [0, 50]
+    sigma: 0.5
+    sigma_list:
+      - 0.5
+      # - 1.0
+      # - 2.0
+      # - 3.0
+  diffusion:
+    range_list:
+      - [0, 25]
+    source_value: 25
+    sink_value: 0
+    sigma: 0.5
+    sigma_list:
+      - 0.5
+simulation:
+  grid_size: 4
+  steps: 10
+  seed: 42
+  seed_list:
+    # - 42
+    # - 1
+    # - 7
+    # - 11
+    # - 19
+    - 17
+    - 29
+    - 35
+    - 44
+    - 49
+  mu_list:
+    - -5.0
+    - -4.5
+    - -4.0
+    - -3.5
+    - -3.0
+    - -2.5
+    - -2.0
+    - -1.75
+    - -1.5
+    - -1.25
+    - -1.0
+    - -0.75
+    - -0.5
+    - -0.25
+    - 0.0
+    - 0.25
+    - 0.5
+    - 0.75
+    - 1.0
+    - 1.25
+    - 1.5
+    - 1.75
+    - 2.0
+    - 2.5
+    - 3.0
+    - 3.5
+    - 4.0
+    - 4.5
+    - 5.0
+run_one:
+  num_problems: 1
+  steps: 10
+  mu: -5
+run_sweep:
+  num_problems: 1
+  make_figures: true
+  multi_model: true
+  task_list:
+    - consensus
+    - diffusion
+llm:
+  backend: openai_compatible
+  base_url: http://localhost:8000/v1
+  model: Qwen/Qwen3-8B
+  temperature: 0.2
+  max_tokens: 256
+  timeout_s: 60
+  response_format: json_object
+prompt:
+  include_pi: true
+policy:
+  kind: llm
+models:
+  hf_repo: Qwen/Qwen3-8B
+  local_dir: models
+  local_subdir: Qwen3-8B
+  model_list:
+    - model_id: Qwen/Qwen3-8B
+      model_subdir: Qwen3-8B
+      hf_repo: Qwen/Qwen3-8B
+      max_model_len: 4096
+    - model_id: meta-llama/Llama-3.1-8B-Instruct
+      model_subdir: Llama-3.1-8B-Instruct
+      hf_repo: meta-llama/Llama-3.1-8B-Instruct
+      max_model_len: 4096
+    - model_id: mistralai/Ministral-3-8B-Instruct-2512
+      model_subdir: Ministral-3-8B-Instruct-2512
+      hf_repo: mistralai/Ministral-3-8B-Instruct-2512
+      max_model_len: 4096
+    - model_id: mistralai/Ministral-3-14B-Instruct-2512
+      model_subdir: Ministral-3-14B-Instruct-2512
+      hf_repo: mistralai/Ministral-3-14B-Instruct-2512
+      max_model_len: 4096
+    - model_id: microsoft/Phi-4-mini-instruct
+      model_subdir: Phi-4-mini-instruct
+      hf_repo: microsoft/Phi-4-mini-instruct
+      max_model_len: 4096
