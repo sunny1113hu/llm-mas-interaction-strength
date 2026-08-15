@@ -1,5 +1,6 @@
 project:
   name: cec2026
+# Paper baseline without the explicit agent-wise receptivity input.
 paths:
   outputs_root: outputs/runs
 dataset:
@@ -89,7 +90,7 @@ llm:
   timeout_s: 60
   response_format: json_object
 prompt:
-  include_pi: true
+  include_pi: false
 policy:
   kind: llm
 models:

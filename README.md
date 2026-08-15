@@ -4,16 +4,16 @@ Code for the paper:
 
 > **Emergent Coordination via Tunable Local Interactions in Distributed LLM Agents**
 > Taiyo Sato, Keisuke Maeda, Naoki Saito, Takahiro Ogawa, and Miki Haseyama
-> (submitted to *Autonomous Agents and Multi-Agent Systems*)
+> (manuscript prepared for submission to *Autonomous Agents and Multi-Agent Systems*)
 
 This repository implements a minimal distributed LLM multi-agent system (LLM-MAS)
 in which agents on a 2-D grid observe only **local comparison counts** relative to
 their four neighbors and update integer states through prompt-conditioned LLM
 inference. The population-level interaction strength is controlled by a single
 continuous parameter $\mu$ through an agent-wise receptivity value
-$P_i = \sigma(\tau_i)$, $\tau_i \sim \mathcal{N}(\mu, \sigma^2)$.
+$P_i = 1/(1 + e^{-\tau_i})$, $\tau_i \sim \mathrm{N}(\mu, \sigma^2)$.
 Sweeping $\mu$ reveals a non-monotonic three-regime landscape (stagnation /
-coordinated intermediate regime / destabilization) across two tasks:
+intermediate coordination / destabilization) across two tasks:
 
 - **Numerical consensus** — toroidal grid, converge toward a uniform value (metric: MAD)
 - **Anchored diffusion** — open grid with two fixed anchor cells, form a smooth gradient (metric: roughness)
@@ -64,6 +64,9 @@ python -m scripts.run_one --config configs/default.yaml
 # full mu sweep (29 values, 10 seeds) for the LLM system
 python -m scripts.run_sweep --config configs/default.yaml
 
+# no-receptivity baseline (same 10 seeds; mu is unused without P_i)
+python -m scripts.run_sweep --config configs/no_receptivity.yaml
+
 # deterministic baselines (RSP rule = "mobility_scaled", pressure family)
 bash scripts/run_mobility_main_sweeps.sh
 bash scripts/run_baseline_main_sweeps.sh
@@ -99,17 +102,42 @@ numbering is historical and does not match the paper numbering:
 | Fig. 11 (grid-size robustness) | `scripts/make_journal_fig9.py` |
 
 Each script contains the run IDs used in the paper as defaults; regenerate a
-figure with, e.g., `python -m scripts.make_journal_fig1`.
+figure with, e.g., `python -m scripts.make_journal_fig1`. Exact regeneration of
+the published figures requires the corresponding raw run directories under
+`outputs/runs/`. Those raw logs are not stored in Git; newly generated sweeps
+receive new run IDs and can be analyzed by adapting the script inputs.
+
+The aggregate checks used in the manuscript can be regenerated from the
+corresponding raw run logs as follows:
+
+```bash
+# Receptivity ablation with oracle and leave-one-seed-out (held-out) selection
+python -m scripts.make_pi_ablation_table \
+  --out results/quantitative/table_pi_ablation.csv
+
+# Invalid-output rates across all LLM runs reported in the paper
+python -m scripts.aggregate_invalid_outputs \
+  --out results/quantitative/invalid_output_rates.csv
+
+# Scale sensitivity of the deterministic RSP rule
+python -m scripts.make_rsp_scale_sensitivity_summary \
+  --out results/quantitative/rsp_scale_sensitivity_summary.csv
+```
 
 ### Data availability
 
 The aggregated tables underlying the quantitative claims in the paper are
-included in `results/quantitative/`. The full raw simulation logs (~1.8 GB)
-exceed practical repository limits; they are available from the corresponding
-author upon reasonable request, and a DOI-archived release is planned upon
-acceptance. Because all randomness is seed-controlled, the runs can also be
-regenerated from this repository (LLM decoding is deterministic only up to
-serving hardware/software).
+included in `results/quantitative/`. In particular,
+`table_pi_ablation.csv` contains both the oracle and leave-one-seed-out results
+reported in Table 1, and `invalid_output_rates.csv` supports the output-validity
+audit (941 invalid outputs among 1,279,400 agent updates; 0.074%). The
+`rsp_scale_sensitivity_summary.csv` file supports the reported robustness of
+the deterministic RSP pattern across scale factors 0.25, 0.5, and 1.0. The full
+raw simulation logs exceed practical Git repository limits; they are available
+from the corresponding author upon reasonable request, and a DOI-archived
+release is planned upon acceptance. Because all randomness is seed-controlled,
+the runs can also be regenerated from this repository (LLM decoding is
+deterministic only up to serving hardware/software).
 
 ## License
 

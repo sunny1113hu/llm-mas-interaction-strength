@@ -1,0 +1,7 @@
+task,scale_factor,run_id,metric,n_trials,n_mu,best_mu,best_mean,best_ci95,low_mu,low_mu_mean,low_mu_ci95,high_mu,high_mu_mean,high_mu_ci95
+consensus,0.25,rsp_scale_s025_consensus,final_dispersion,290,29,-0.75,0.840,0.117,-5.00,6.474,0.596,5.00,2.848,0.285
+diffusion,0.25,rsp_scale_s025_diffusion,roughness_final,290,29,1.25,22.788,1.487,-5.00,139.767,23.902,5.00,30.671,3.104
+consensus,0.50,rsp_scale_s050_consensus,final_dispersion,290,29,-1.75,0.930,0.157,-5.00,6.474,0.596,5.00,6.203,0.576
+diffusion,0.50,rsp_scale_s050_diffusion,roughness_final,290,29,-0.75,26.096,3.200,-5.00,139.767,23.902,5.00,86.504,11.156
+consensus,1.00,rsp_scale_s100_consensus,final_dispersion,290,29,-2.50,0.921,0.129,-5.00,6.474,0.596,5.00,11.525,1.008
+diffusion,1.00,rsp_scale_s100_diffusion,roughness_final,290,29,-2.00,26.683,2.545,-5.00,139.767,23.902,5.00,314.767,50.016

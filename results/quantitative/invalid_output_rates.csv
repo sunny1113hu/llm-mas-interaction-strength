@@ -1,0 +1,11 @@
+model,task,n_updates,n_invalid,invalid_rate_percent
+Qwen/Qwen3-8B,consensus,477200,693,0.1452
+Qwen/Qwen3-8B,diffusion,442200,234,0.0529
+meta-llama/Llama-3.1-8B-Instruct,consensus,48000,0,0.0000
+meta-llama/Llama-3.1-8B-Instruct,diffusion,42000,0,0.0000
+microsoft/Phi-4-mini-instruct,consensus,48000,6,0.0125
+microsoft/Phi-4-mini-instruct,diffusion,42000,8,0.0190
+mistralai/Ministral-3-14B-Instruct-2512,consensus,48000,0,0.0000
+mistralai/Ministral-3-14B-Instruct-2512,diffusion,42000,0,0.0000
+mistralai/Ministral-3-8B-Instruct-2512,consensus,48000,0,0.0000
+mistralai/Ministral-3-8B-Instruct-2512,diffusion,42000,0,0.0000

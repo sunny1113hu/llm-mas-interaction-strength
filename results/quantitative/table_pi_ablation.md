@@ -1,12 +1,20 @@
-| task | model | metric | best_mu_with_pi | with_pi_mean | with_pi_ci95 | no_pi_mean | no_pi_ci95 | abs_improvement | rel_improvement_pct | cohens_d |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| consensus | Qwen3-8B | final_dispersion | -0.50 | 1.184 | 0.480 | 2.026 | 0.245 | 0.842 | 41.6 | 1.369 |
-| consensus | Llama-3.1-8B | final_dispersion | -0.50 | 2.352 | 0.385 | 4.028 | 0.647 | 1.676 | 41.6 | 1.950 |
-| consensus | Ministral-3-8B | final_dispersion | 0.50 | 2.103 | 0.302 | 2.460 | 0.353 | 0.357 | 14.5 | 0.674 |
-| consensus | Ministral-3-14B | final_dispersion | -0.50 | 1.982 | 0.346 | 1.919 | 0.227 | -0.063 | -3.3 | -0.134 |
-| consensus | Phi-4-mini | final_dispersion | 4.50 | 3.899 | 1.787 | 4.712 | 1.000 | 0.812 | 17.2 | 0.348 |
-| diffusion | Qwen3-8B | roughness_final | -0.25 | 29.567 | 5.852 | 41.629 | 4.307 | 12.062 | 29.0 | 1.455 |
-| diffusion | Llama-3.1-8B | roughness_final | -1.25 | 45.875 | 15.162 | 35.504 | 5.671 | -10.371 | -29.2 | -0.562 |
-| diffusion | Ministral-3-8B | roughness_final | 0.50 | 41.221 | 7.301 | 167.217 | 23.779 | 125.996 | 75.3 | 4.440 |
-| diffusion | Ministral-3-14B | roughness_final | 0.25 | 30.863 | 3.929 | 26.562 | 2.081 | -4.300 | -16.2 | -0.848 |
-| diffusion | Phi-4-mini | roughness_final | -0.50 | 78.775 | 22.907 | 83.746 | 13.923 | 4.971 | 5.9 | 0.163 |
+# Receptivity Ablation
+
+Lower values are better for both metrics. Positive reductions indicate an
+improvement over the no-receptivity baseline. The oracle result selects $\mu$
+on the evaluation seeds and therefore characterizes the swept design space.
+The held-out result uses leave-one-seed-out selection, so no evaluation seed
+influences the choice of $\mu$.
+
+| Task (metric) | Model | w/o $P_i$ | Oracle w/ $P_i$ ($\mu$) | Reduction | Held-out w/ $P_i$ | Reduction |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Consensus (MAD) | Qwen3-8B | 2.03 | 1.18 (-0.50) | +41.6% | 1.53 | +24.4% |
+| Consensus (MAD) | Llama-3.1-8B | 4.03 | 2.35 (-0.50) | +41.6% | 2.35 | +41.6% |
+| Consensus (MAD) | Ministral-3-8B | 2.46 | 2.10 (0.50) | +14.5% | 2.49 | -1.2% |
+| Consensus (MAD) | Ministral-3-14B | 1.92 | 1.98 (-0.50) | -3.3% | 2.13 | -11.0% |
+| Consensus (MAD) | Phi-4-mini | 4.71 | 3.90 (4.50) | +17.2% | 5.65 | -20.0% |
+| Anchored diffusion (roughness) | Qwen3-8B | 41.6 | 29.6 (-0.25) | +29.0% | 29.6 | +29.0% |
+| Anchored diffusion (roughness) | Llama-3.1-8B | 35.5 | 45.9 (-1.25) | -29.2% | 51.2 | -44.3% |
+| Anchored diffusion (roughness) | Ministral-3-8B | 167 | 41.2 (0.50) | +75.3% | 41.2 | +75.3% |
+| Anchored diffusion (roughness) | Ministral-3-14B | 26.6 | 30.9 (0.25) | -16.2% | 33.2 | -25.1% |
+| Anchored diffusion (roughness) | Phi-4-mini | 83.7 | 78.8 (-0.50) | +5.9% | 78.8 | +5.9% |
